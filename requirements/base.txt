@@ -1,0 +1,6 @@
+django==3.0.5
+psycopg2==2.8.5
+django-environ==0.4.5
+django-configurations==2.2
+djangorestframework==3.11.0
+django-health-check==3.12.1

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  Dictionary
+{% endblock %}
+
+{% block container %}
+<ul class="list-group list-group-flush">
+  {% if words %}
+    {% for word in words %}
+    <li class="list-group-item">{{ word.value }}: {{ word.description }}</li>
+    {% endfor %}
+  {% else %}
+    <p>Dictionary is empty. <a href="{% url "dictionary:add" %}">Add</a> some words here.</p>
+  {% endif %}
+</ul>
+{% endblock %}

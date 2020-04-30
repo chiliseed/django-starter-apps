@@ -1,0 +1,9 @@
+-r base.txt
+
+django-extensions==2.2.9
+black
+prospector
+factory_boy
+pytest
+pytest-django
+

@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:11.6
+    restart: always
+    container_name: demo_db
+    hostname: postgres
+    volumes: # map data outside the container
+      - ./pg/local/data/postgres/data:/var/lib/postgres
+      - ./pg/local/data/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - chiliseed_demo
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        requirements: requirements/dev.txt
+    image: chiliseed/demo:latest
+    container_name: chiliseed_demo
+    restart: always
+    command: bash /app/runner.sh
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app
+      - .env:/app/demo/.env
+      - ./pytest.ini:/app/pytest.ini
+    networks:
+      - chiliseed_demo
+
+
+networks:
+  chiliseed_demo:

@@ -1,0 +1,23 @@
+FROM python:3.8.2-slim-buster
+
+LABEL maintainer="Chiliseed LTD"
+
+ARG requirements=requirements/dev.txt
+ENV PATH=$PATH:/app
+ENV PYTHONPATH=$PYTHONPATH:/app
+
+RUN mkdir /app
+WORKDIR /app
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y \
+        gcc \
+        libpq-dev \
+        postgresql-client && \
+        apt-get clean
+
+COPY requirements requirements
+
+RUN pip install -r ${requirements}
+
+COPY src/ /app
