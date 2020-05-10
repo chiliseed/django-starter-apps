@@ -150,4 +150,20 @@ class Prod(Base):
     AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID", default="")
     AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY", default="")
     AWS_STORAGE_BUCKET_NAME = env.str("AWS_STATICS_STORAGE_BUCKET_NAME", default="")
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["*.chiliseed.com", "chiliseed.com"]
+
+    @classmethod
+    def setup(cls):
+        super().setup()
+        import requests
+
+        ec2_private_ip = None
+        try:
+            ec2_private_ip = requests.get(
+                'http://169.254.169.254/latest/meta-data/local-ipv4',
+                timeout=0.01).text
+        except requests.exceptions.RequestException:
+            pass
+
+        if ec2_private_ip:
+            cls.ALLOWED_HOSTS.append(ec2_private_ip)
