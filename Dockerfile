@@ -1,4 +1,4 @@
-FROM python:3.8.2-slim-buster
+FROM python:3.8.2-slim-buster AS base
 
 LABEL maintainer="Chiliseed LTD"
 
@@ -21,3 +21,8 @@ COPY requirements requirements
 RUN pip install -r ${requirements}
 
 COPY src/ /app
+
+
+FROM base AS prod
+
+CMD python manage.py collectstatic --noinput && python manage.py migrate && gunicorn -w 3 --bind "0.0.0.0:8000" demo.wsgi
