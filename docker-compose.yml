@@ -23,6 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: base
       args:
         requirements: requirements/dev.txt
     image: chiliseed/demo:latest
