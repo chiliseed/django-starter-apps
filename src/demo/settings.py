@@ -149,4 +149,6 @@ class Prod(Base):
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID", default="")
     AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY", default="")
-    AWS_STORAGE_BUCKET_NAME = env.str("AWS_STORAGE_BUCKET_NAME", default="")
+    AWS_STORAGE_BUCKET_NAME = env.str("AWS_STATICS_STORAGE_BUCKET_NAME", default="")
+    ALLOWED_HOSTS = ["*.chiliseed.com", "chiliseed.com"]
+
