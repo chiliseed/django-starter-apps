@@ -25,4 +25,6 @@ COPY src/ /app
 
 FROM base AS prod
 
+RUN mkdir /app/statics
+
 CMD python manage.py collectstatic --noinput && python manage.py migrate && gunicorn -w 3 --bind "0.0.0.0:8000" demo.wsgi
