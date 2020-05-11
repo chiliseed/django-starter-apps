@@ -151,6 +151,6 @@ class Prod(Base):
     AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY", default="")
     AWS_STORAGE_BUCKET_NAME = env.str("AWS_STATICS_STORAGE_BUCKET_NAME", default="")
     AWS_DEFAULT_ACL = "public-read"
-    AWS_QUERYSTRING_AUTH = False
+    AWS_QUERYSTRING_AUTH = True
     AWS_IS_GZIPPED = True
     ALLOWED_HOSTS = ["*"]
