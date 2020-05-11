@@ -136,6 +136,38 @@ class Base(Configuration):
         os.path.join(BASE_DIR, "statics"),
     ]
 
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "verbose": {
+                "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+                "style": "{",
+            },
+        },
+        "handlers": {"console": {"class": "logging.StreamHandler", "formatter": 'verbose'}, },
+        "loggers": {
+            "django": {
+                "handlers": ["console"],
+                "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+                "formatter": "verbose",
+                "propagate": True,
+            },
+            "dictionary": {
+                "handlers": ["console"],
+                "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+                "formatter": "verbose",
+                "propagate": True,
+            },
+            "api": {
+                "handlers": ["console"],
+                "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+                "formatter": "verbose",
+                "propagate": True,
+            },
+        }
+    }
+
 
 class Dev(Base):
     @classmethod
@@ -151,5 +183,6 @@ class Prod(Base):
     AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY", default="")
     AWS_STORAGE_BUCKET_NAME = env.str("AWS_STATICS_STORAGE_BUCKET_NAME", default="")
     AWS_DEFAULT_ACL = "public-read"
+    AWS_QUERYSTRING_EXPIRE = 1800
     AWS_IS_GZIPPED = True
     ALLOWED_HOSTS = ["*"]
