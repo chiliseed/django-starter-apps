@@ -4,3 +4,4 @@
 /pg
 /.env
 *.pem
+/src/pytest.ini
