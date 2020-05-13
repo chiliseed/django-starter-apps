@@ -5,7 +5,7 @@ This repo contains different dockerized django starter projects, with basic use 
 
 Locally, you can run the code with django compose or use our helper tool `ddc-shob <https://github.com/chiliseed/django-compose-shob>`_.
 
-Remotely, you can use our `Chiliseed <https://chiliseed.com>`_ to run it on AWS.
+Remotely, you can use our `Chiliseed service <https://chiliseed.com>`_ to run it on AWS.
 
 Content
 -------
@@ -30,7 +30,7 @@ How to use
 
 1. Clone this repo locally
 2. Rename upper most folder to something meaningful to you
-3. Optionally, recommended, update packages in **requirements** folder to latest versions
+3. Optionally, recommended, update packages in ``requirements`` folder to latest versions
 4. Rename ``container_name`` in ``docker_compose.yml`` to something meaningful to you
 5. Rename network in ``docker_compose.yml`` to something meaningful to you
 6. ``cp .env.template .env`` and fill in the blanks
