@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
 
@@ -22,8 +22,8 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
       target: base
+      dockerfile: Dockerfile
       args:
         requirements: requirements/dev.txt
     image: chiliseed/demo:latest
@@ -40,7 +40,7 @@ services:
       - db
     volumes:
       - ./src:/app
-      - .env:/app/demo/.env
+      - .env:/app/backend/.env
       - ./pytest.ini:/app/pytest.ini
     networks:
       - chiliseed_demo
