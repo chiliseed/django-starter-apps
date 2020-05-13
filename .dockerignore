@@ -1,7 +1,10 @@
 docker-compose.yml
 .venv/
+venv/
 *.pyc
 .idea/
+.vscode/
 .git/
 __pycache__/
 pg/
+*.pem
