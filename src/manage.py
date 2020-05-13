@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'demo.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
     os.environ.setdefault('DJANGO_CONFIGURATION', 'Dev')
     try:
         from configurations.management import execute_from_command_line
