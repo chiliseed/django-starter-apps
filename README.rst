@@ -36,7 +36,8 @@ How to use
 5. Rename network in ``docker_compose.yml`` to something meaningful to you
 6. ``cp .env.template .env`` and fill in the blanks
 7. You might also want to remove the ``LICENSE``, unless your project is also open source and MIT license is good for you
-8. ``ddc-shob start`` and see your project being setup and started
+8. ``ddc-shob start`` or (``docker-compose up -d``) and see your project being setup and started
+9. You might probably want to remove ``dictionary`` application and re-create the database (``ddc-shob purge-db`` can help you with that)
 
 
 Issues and features suggestions
