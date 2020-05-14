@@ -40,7 +40,6 @@ services:
       - db
     volumes:
       - ./src:/app
-      - .env:/app/backend/.env
       - ./pytest.ini:/app/pytest.ini
     networks:
       - chiliseed_demo
