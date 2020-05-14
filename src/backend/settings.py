@@ -189,7 +189,6 @@ class Base(Configuration):
             "api": {
                 "handlers": ["console_structlog_plain"],
                 "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-                "formatter": "verbose",
                 "propagate": True,
             },
         }
