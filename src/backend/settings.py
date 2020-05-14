@@ -233,3 +233,10 @@ class Prod(Base):
     # set to "*" to help with container/server ips and allow load balancer to
     # sample the service
     ALLOWED_HOSTS = ["*"]
+
+    @classmethod
+    def setup(cls):
+        super(Prod, cls).setup()
+        cls.LOGGING["loggers"]["django"]["handlers"] = ["console_structlog_json"]
+        cls.LOGGING["loggers"]["dictionary"]["handlers"] = ["console_structlog_json"]
+        cls.LOGGING["loggers"]["api"]["handlers"] = ["console_structlog_json"]
