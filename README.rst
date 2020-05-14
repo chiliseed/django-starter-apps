@@ -21,6 +21,7 @@ Content
     - example template based app
     - `django-extensions <https://django-extensions.readthedocs.io/en/latest/>`_ for local environment
     - `django-storages <https://django-storages.readthedocs.io/en/latest/>`_ with S3 backend setup
+    - `django-structlog <https://github.com/jrobichaud/django-structlog>`_
 - **cache** -> basic project + redis cache
 - **offline-workers** -> basic project + redis cache + celery configured to run with redis broker
 
