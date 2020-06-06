@@ -1,4 +1,4 @@
-django==3.0.6
+django==3.0.7
 django-configurations==2.2
 django-environ==0.4.5
 django-health-check==3.12.1
