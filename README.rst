@@ -25,7 +25,7 @@ Content
     - `djangoql <https://github.com/ivelum/djangoql/>`_ for easier db lookups in admin
 
 - **cache** -> basic project + redis cache
-- **offline-workers** -> basic project + redis cache + celery configured to run with redis broker
+- **celery_redis** -> basic project + redis cache + celery configured to run with redis broker
 
 
 How to use
