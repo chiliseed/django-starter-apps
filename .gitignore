@@ -5,3 +5,8 @@
 /.env
 *.pem
 /src/pytest.ini
+.DS_Store
+__pycache__/
+
+celerybeat-schedule
+celerybeat.pid
