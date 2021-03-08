@@ -44,7 +44,9 @@ class Base(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        "djangoql",
 
+        'django_extensions',
         'rest_framework',
         'health_check',
         'health_check.db',
@@ -214,11 +216,27 @@ class Base(Configuration):
     )
 
 
+def show_debug_toolbar(request):
+    """Hack to display debug toolbar when running in Docker."""
+    if "PYTEST_CURRENT_TEST" in env:
+        return False
+    return True
+
+
 class Dev(Base):
+    INTERNAL_IPS = ["127.0.0.1"]
+
+    DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": show_debug_toolbar}
+
     @classmethod
     def setup(cls):
         super(Dev, cls).setup()
-        cls.INSTALLED_APPS.append("django_extensions")
+        cls.INSTALLED_APPS += [
+            "debug_toolbar",
+        ]
+
+        cls.MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
+        cls.LOGGING["loggers"][""]["level"] = "DEBUG"
 
 
 class Prod(Base):
