@@ -1,4 +1,4 @@
-FROM python:3.8.2-slim-buster AS base
+FROM python:3.9.2-slim-buster AS base
 
 LABEL maintainer="Chiliseed LTD"
 
