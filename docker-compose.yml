@@ -19,7 +19,16 @@ services:
     networks:
       - chiliseed_demo
 
-  api:
+  cache:
+    image: redis:5-buster
+    container_name: demo_cache
+    hostname: cache
+    ports:
+      - "6379:6379"
+    networks:
+      - chiliseed_demo
+
+  web:
     build:
       context: .
       target: base
