@@ -53,6 +53,30 @@ services:
     networks:
       - chiliseed_demo
 
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        requirements: requirements/dev.txt
+    image: chiliseed/demo/scheduler:latest
+    container_name: chiliseed_scheduler
+    restart: always
+    command: bash /app/scheduler_runner.sh
+    env_file:
+      - .env
+    links:
+      - db
+      - cache
+    depends_on:
+      - db
+      - cache
+    volumes:
+      - ./src:/app
+    networks:
+      - chiliseed_demo
+
+
 
 networks:
   chiliseed_demo:
