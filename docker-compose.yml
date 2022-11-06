@@ -20,7 +20,7 @@ services:
       - chiliseed_demo
 
   cache:
-    image: redis:5-buster
+    image: redis:6.2.7-alpine3.16
     container_name: demo_cache
     hostname: cache
     ports:
