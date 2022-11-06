@@ -12,4 +12,4 @@ python manage.py check
 
 # Start celery worker via watchdog
 # Start with beat scheduler as well; ok in development, not in production!
-celery -A demo worker -l info
+celery -A backend worker -l info

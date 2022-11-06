@@ -60,7 +60,7 @@ services:
       args:
         requirements: requirements/dev.txt
     image: chiliseed/demo/scheduler:latest
-    container_name: chiliseed_scheduler
+    container_name: chiliseed_demo_scheduler
     restart: always
     command: bash /app/scheduler_runner.sh
     env_file:

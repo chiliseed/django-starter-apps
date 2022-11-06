@@ -4,6 +4,7 @@ from django.urls import reverse
 import structlog
 
 from dictionary.models import Word
+from dictionary.tasks import add_word
 
 logger = structlog.get_logger(__name__)
 
@@ -25,8 +26,8 @@ def add(request):
     if request.method == "POST":
         form = WordForm(request.POST)
         if form.is_valid():
-            word = form.save()
-            logger.info("added new word", word=word.value)
+            logger.info("form is valid")
+            add_word.delay(form.cleaned_data["value"], form.cleaned_data["description"])
             return redirect(reverse("dictionary:list"))
     else:
         form = WordForm()

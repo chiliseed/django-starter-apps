@@ -16,7 +16,7 @@ class Base(Configuration):
     SECRET_KEY = env.str("SECRET_KEY")
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = env.bool("DEBUG")
+    DEBUG = env.bool("DEBUG", False)
 
     ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default="*")
 
@@ -36,6 +36,7 @@ class Base(Configuration):
         'health_check',
         'health_check.db',
         'health_check.cache',
+        'django_celery_results',
 
         "api",
         "dictionary",
@@ -89,10 +90,12 @@ class Base(Configuration):
 
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+    REDIS_URL = f"redis://{env.str('REDIS_HOST')}:{env.str('REDIS_PORT')}/{env.str('REDIS_CACHE_DB', default='0')}"
+
     CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": f"redis://{env.str('REDIS_HOST')}:{env.str('REDIS_PORT')}/{env.str('REDIS_CACHE_DB', default='0')}",
+            "LOCATION": REDIS_URL,
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
             },
@@ -145,6 +148,12 @@ class Base(Configuration):
         ]
     }
 
+    CELERY_BROKER_URL = REDIS_URL
+    CELERY_RESULT_BACKEND = 'django-db'
+    CELERY_ACCEPT_CONTENT = ["application/json"]
+    CELERY_TASK_SERIALIZER = "json"
+    CELERY_RESULT_SERIALIZER = "json"
+
     LOGGING = {
         "version": 1,
         "disable_existing_loggers": False,
@@ -184,6 +193,11 @@ class Base(Configuration):
                 "propagate": True,
             },
             "api": {
+                "handlers": ["console_structlog_plain"],
+                "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+                "propagate": True,
+            },
+            "celery": {
                 "handlers": ["console_structlog_plain"],
                 "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
                 "propagate": True,

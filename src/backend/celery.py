@@ -13,7 +13,7 @@ os.environ.setdefault('DJANGO_CONFIGURATION', 'Dev')
 import configurations
 configurations.setup()
 
-app = Celery("dict")
+app = Celery("backend")
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
